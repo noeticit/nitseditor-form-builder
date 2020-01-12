@@ -1,8 +1,8 @@
 <template>
     <div class="flex-col justify-start w-full">
-        <div class="mt-2 text-gray-700 text-sm font-normal">{{ label }}</div>
+        <div class="mt-2 block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">{{ label }}</div>
         <input
-            class="mt-1 appearance-none border rounded w-full py-2 px-3 text-sm text-gray-900 leading-tight placeholder-gray-700 focus:placeholder-gray-500 focus:outline-none focus:shadow-outline"
+            class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             :class="errorDisplay ? 'border-red-500 focus:bg-white focus:border-red-500': ''"
             :type="type"
             :placeholder="placeholder" :value="value" @input="emitEvent()" ref="input"

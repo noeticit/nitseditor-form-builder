@@ -42,6 +42,9 @@
                                         :error="errors['first_name']"
                                         placeholder="Select first name"
                                         :options="options"
+                                        searchable
+                                        @searchQuery="searchQuery"
+                                        multiple
                                 >
                                 </input-multi-select>
                                 <input-text
@@ -129,6 +132,9 @@
 
                     }
                 })
+            },
+            searchQuery(search) {
+                console.log(search)
             }
         }
     }
