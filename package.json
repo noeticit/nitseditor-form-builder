@@ -1,6 +1,6 @@
 {
   "name": "nitseditor-form-builder",
-  "version": "0.0.1",
+  "version": "0.0.01",
   "description": "Frontend of form builder in NitsEditor CMS",
   "main": "index.js",
   "scripts": {
@@ -8,6 +8,7 @@
   },
   "author": "Nitish Kumar",
   "license": "MIT",
+  "homepage": "https://github.com/noeticit/nitseditor-form-builder",
   "devDependencies": {
     "axios": "^0.19",
     "vue": "^2.6.11",
