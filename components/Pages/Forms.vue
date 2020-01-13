@@ -29,16 +29,16 @@
                                 >
                                 </input-text>
                                 <input-select
-                                    label="First name"
-                                    v-model="last_name"
+                                    label="Single Select"
+                                    v-model="single_select"
                                     :error="errors['first_name']"
                                     placeholder="Select first name"
                                     :options="options"
                                 >
                                 </input-select>
                                 <input-multi-select
-                                        label="First name"
-                                        v-model="multiselect"
+                                        label="Multi Select"
+                                        v-model="multi_select"
                                         :error="errors['first_name']"
                                         placeholder="Select first name"
                                         :options="options"
@@ -47,22 +47,19 @@
                                         multiple
                                 >
                                 </input-multi-select>
-                                <input-text
-                                        label="First name"
-                                        placeholder="First name"
-                                        type="text"
-                                        v-model="first_name"
+                                <input-file
+                                        label="Upload file"
+                                        v-model="upload_file"
                                         :error="errors['first_name']"
                                 >
-                                </input-text>
-                                <input-text
-                                        label="Last name"
-                                        placeholder="Last name"
-                                        type="text"
-                                        v-model="last_name"
-                                        :error="errors['last_name']"
+                                </input-file>
+                                <input-date
+                                        label="Date"
+                                        placeholder="Select date"
+                                        v-model="date"
+                                        :error="errors['date']"
                                 >
-                                </input-text>
+                                </input-date>
                                 <div class="mt-4 text-center">
                                     <button @click="submit()" class="inline-block px-4 py-2 rounded-lg shadow-md bg-teal-500 hover:bg-teal-400 focus:outline-none focus:shadow-outline text-white text-sm tracking-wider font-semibold">Check</button>
                                 </div>
@@ -94,18 +91,25 @@
     import InputText from '../Elements/Forms/Inputs/Text'
     import InputSelect from "../Elements/Forms/Inputs/Select";
     import InputMultiSelect from "../Elements/Forms/Inputs/MultiSelect";
+    import InputFile from "../Elements/Forms/Inputs/File";
+    import InputDate from "../Elements/Forms/Inputs/Date";
     export default {
         name: "Forms",
         components: {
+            InputDate,
+            InputFile,
             InputSelect, InputMultiSelect, MenuOne, TopBarOne, FooterOne, InputText
         },
         data() {
             return {
                 first_name: '',
                 last_name: '',
+                single_select: '',
+                upload_file: '',
+                date: '',
                 errors: {},
                 message: '',
-                multiselect: [],
+                multi_select: [],
                 options: [
                     {value: 1, label: 'Select 1'},
                     {value: 2, label: 'Select 2'},

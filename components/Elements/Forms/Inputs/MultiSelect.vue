@@ -19,6 +19,7 @@
                 <input class="flex outline-none pt-1 pb-1 ml-2 mb-1 bg-gray-200 text-gray-700" :placeholder="placeholder"
                        @focus="dropdown = true"
                        v-model="search"
+                       ref="input_select"
                 >
             </div>
             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -27,7 +28,7 @@
                 </svg>
             </div>
             <button v-if="dropdown" @click="dropdown = false" tabindex="-1" class="fixed inset-0 h-full w-full bg-black opacity-0 cursor-default"></button>
-            <div v-if="dropdown" class="absolute right-0 mt-2 py-2 w-full bg-white rounded-lg shadow-xl">
+            <div v-if="dropdown" ref="dropdown" class="absolute right-0 mt-2 py-2 w-full bg-white rounded-lg shadow-xl">
                 <ul>
                     <li v-if="computedOptions.length" v-for="item in computedOptions"
                         class="block px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white z-10"
@@ -43,6 +44,8 @@
 </template>
 
 <script>
+    import { createPopper } from '@popperjs/core';
+
     export default {
         data() {
             return {
@@ -116,6 +119,12 @@
             }
         },
         created() {
+            const button = this.$refs.input_select.$el;
+            const tooltip =this.$refs.dropdown.$el;
+
+            createPopper(button, tooltip, {
+                placement: 'right',
+            });
         },
         computed: {
             errorDisplay() {
