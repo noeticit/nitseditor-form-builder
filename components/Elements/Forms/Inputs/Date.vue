@@ -9,7 +9,7 @@
                 <input
                         class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                         :class="errorDisplay ? 'border-red-500 focus:bg-white focus:border-red-500': ''"
-                        type="text"
+                        type="date"
                         @focus="datepicker = true"
                         :placeholder="placeholder" v-model="date" ref="input_date"
                 >
@@ -176,8 +176,8 @@
                 return true;
             },
             selectElement(date) {
-                this.date = date+'/'+(this.month+1)+'/'+this.year;
-                this.$emit('input', this.date);
+                this.date = this.year+'-'+(("0" + (this.month+1)).slice(-2))+'-'+("0" + (date)).slice(-2);
+                this.$emit('input', ("0" + (date)).slice(-2)+'/'+(("0" + (this.month+1)).slice(-2))+'/'+this.year);
             },
             selectYearElement(year) {
                 this.year = year;
