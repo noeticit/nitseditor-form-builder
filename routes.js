@@ -31,6 +31,14 @@ export const router = new VueRouter({
                     requiresAuth: false
                 }
             },
+            {
+                path: '/form-builder',
+                component: Vue.component('form-builder', () => import('./components/Pages/FormBuilder.vue')),
+                name: 'form-builder',
+                meta: {
+                    requiresAuth: false
+                }
+            },
         ],
     base: '/',
 });
