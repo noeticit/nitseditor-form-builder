@@ -149,10 +149,10 @@
             return {
                 showGridModal: false,
                 forms: [
-                    {component: 'single-column'},
-                    {component: 'double-column'},
-                    {component: 'triple-column'},
-                    {component: 'quad-column'},
+                    {component: 'single-column', data:''},
+                    {component: 'double-column', data:''},
+                    {component: 'triple-column', data:''},
+                    {component: 'quad-column', data:''},
                 ]
             }
         },
