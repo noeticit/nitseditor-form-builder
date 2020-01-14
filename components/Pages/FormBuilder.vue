@@ -10,7 +10,7 @@
                     <div class="flex-col item-center justify-center">
                         <div class="flex justify-between">
                             <h3 class="text-grey-100 mb-1 font-extrabold">#form-builder</h3>
-                            <button class="inline-block px-2 py-1 rounded-lg shadow-md bg-teal-500 hover:bg-teal-400 focus:outline-none focus:shadow-outline text-white text-sm tracking-wider font-semibold">Add</button>
+                            <button class="inline-block px-2 py-1 rounded-lg shadow-md bg-teal-500 hover:bg-teal-400 focus:outline-none focus:shadow-outline text-white text-sm tracking-wider font-semibold" @click="showGridModal = true">Add</button>
                         </div>
 
                         <div class="flex items-center justify-start">
@@ -29,10 +29,15 @@
                                         </svg>
                                     </div>
                                 </div>
-                                <div class="w-full bg-gray-300 justify-center flex-col p-5">
-                                    <single-column></single-column>
+                                <div class="w-full bg-gray-300 justify-center flex-col p-3">
+                                    <component class="m-2"
+                                            v-for="(item, index) in forms"
+                                            :key="index"
+                                            :is="item.component"
+                                    >
+                                    </component>
                                 </div>
-                                <div class="w-full bg-gray-300 justify-center flex">
+                                <div class="w-full bg-gray-300 justify-center flex" v-if="!forms.length">
                                     <div class="h-64 w-64 bg-gray-300">
                                         <div class="flex-col justify-start p-6">
                                             <h3 class="mb-3 mt-4 text-right text-gray-700 tracking-wider text-md font-semibold">Start building your form!</h3>
@@ -78,17 +83,17 @@
 
                     <!--Body-->
                     <div class="flex-col">
-                        <div class="flex" @click="singleColumn">
+                        <div class="flex" @click="addColumn('single')">
                             <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M0 3h20v2H0V3zm0 4h20v2H0V7zm0 4h20v2H0v-2zm0 4h20v2H0v-2z"/></svg>
                             <span class="ml-4 text-xs text-gray-500 font-semibold">1 Column</span>
                         </div>
-                        <div class="flex justify-start">
+                        <div class="flex justify-start" @click="addColumn('double')">
                             <svg class="h-4 w-4 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M0 3h20v2H0V3zm0 4h20v2H0V7zm0 4h20v2H0v-2zm0 4h20v2H0v-2z"/></svg>
                             <div class="border-l-2 h-4"></div>
                             <svg class="ml-1 mr-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M0 3h20v2H0V3zm0 4h20v2H0V7zm0 4h20v2H0v-2zm0 4h20v2H0v-2z"/></svg>
                             <span class="ml-4 text-xs text-gray-500 font-semibold">2 Columns</span>
                         </div>
-                        <div class="flex justify-start">
+                        <div class="flex justify-start" @click="addColumn('triple')">
                             <svg class="h-4 w-4 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M0 3h20v2H0V3zm0 4h20v2H0V7zm0 4h20v2H0v-2zm0 4h20v2H0v-2z"/></svg>
                             <div class="border-l-2 h-4"></div>
                             <svg class="ml-1 mr-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M0 3h20v2H0V3zm0 4h20v2H0V7zm0 4h20v2H0v-2zm0 4h20v2H0v-2z"/></svg>
@@ -96,7 +101,7 @@
                             <svg class="ml-1 mr-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M0 3h20v2H0V3zm0 4h20v2H0V7zm0 4h20v2H0v-2zm0 4h20v2H0v-2z"/></svg>
                             <span class="ml-4 text-xs text-gray-500 font-semibold">3 Columns</span>
                         </div>
-                        <div class="flex justify-start">
+                        <div class="flex justify-start" @click="addColumn('quad')">
                             <svg class="h-4 w-4 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M0 3h20v2H0V3zm0 4h20v2H0V7zm0 4h20v2H0v-2zm0 4h20v2H0v-2z"/></svg>
                             <div class="border-l-2 h-4"></div>
                             <svg class="ml-1 mr-1 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M0 3h20v2H0V3zm0 4h20v2H0V7zm0 4h20v2H0v-2zm0 4h20v2H0v-2z"/></svg>
@@ -130,18 +135,30 @@
     import InputFile from "../Elements/Forms/Inputs/File";
     import InputDate from "../Elements/Forms/Inputs/Date";
     import SingleColumn from "../../application/FormBuilder/Grids/SingleColumn";
+    import DoubleColumn from "../../application/FormBuilder/Grids/DoubleColumn";
+    import TripleColumn from "../../application/FormBuilder/Grids/TripleColumn";
+    import QuadColumn from "../../application/FormBuilder/Grids/QuadColumn";
     export default {
         name: "FormBuilder",
         components: {
-            InputDate, InputFile, InputSelect, InputMultiSelect, MenuOne, TopBarOne, FooterOne, InputText, SingleColumn
+            InputDate, InputFile, InputSelect, InputMultiSelect,
+            MenuOne, TopBarOne, FooterOne, InputText, SingleColumn,
+            DoubleColumn, TripleColumn, QuadColumn
         },
         data() {
             return {
                 showGridModal: false,
+                forms: [
+                    {component: 'single-column'},
+                    {component: 'double-column'},
+                    {component: 'triple-column'},
+                    {component: 'quad-column'},
+                ]
             }
         },
         methods: {
-            singleColumn() {
+            addColumn(type) {
+                this.forms.push({component: type+'-column'});
                 this.showGridModal = false;
             }
         }
