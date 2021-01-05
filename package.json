@@ -10,7 +10,7 @@
   "license": "MIT",
   "homepage": "https://github.com/noeticit/nitseditor-form-builder",
   "devDependencies": {
-    "axios": "^0.19",
+    "axios": "^0.21",
     "vue": "^2.6.11",
     "vue-template-compiler": "^2.6.11"
   },
